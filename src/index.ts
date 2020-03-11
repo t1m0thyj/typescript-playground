@@ -28,6 +28,24 @@ const impureNonDet : NonDet = {
         Math.round(Math.random() * (upper - lower) + lower)
 };
 
+type Fallible = {
+    raise<A>(exn : string) : A
+};
+
+function div(numerator: number, denominator: number): reader.T<Fallible,number> {
+    if (denominator == 0) {
+        return reader.lift(env => env.raise(numerator.toString() + "/0"));
+    } else {
+        return reader.pure(numerator / denominator);
+    }
+}
+
+const impureFallible = {
+    raise : (exn : string) => { throw Error(exn); }
+};
+
 if (require.main === module) {
     console.log(fizzbuzz.run(impureNonDet));
+    console.log(div(13, 5).run(impureFallible));
+    console.log(div(13, 0).run(impureFallible));
 }
