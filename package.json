@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "node-fetch": "^2.6.5",
+    "serve": "^12.0.1",
     "serve-handler": "^6.1.3"
   }
 }

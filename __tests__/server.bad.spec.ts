@@ -1,3 +1,4 @@
+import * as childProcess from "child_process";
 import * as fs from "fs";
 import * as http from "http";
 import * as path from "path";
@@ -26,12 +27,21 @@ describe("localhost http file server", () => {
         server.close();
     });
 
-    it("should be able to fetch package.json", async () => {
+    it("should be able to fetch package.json using API", async () => {
         const response = await fetch(`${serverUrl}/package.json`);
         expect(response.ok).toBe(true);
 
         const responseText = await response.text();
         const expectedText = fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8");
         expect(responseText).toBe(expectedText);
-    })
+    });
+
+    it("should be able to fetch package.json using CLI", async () => {
+        const response = childProcess.spawnSync("curl", [`${serverUrl}/package.json`]);
+        expect(response.status).toBe(0);
+
+        const responseText = response.stdout.toString();
+        const expectedText = fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8");
+        expect(responseText).toBe(expectedText);
+    });
 });
