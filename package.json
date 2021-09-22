@@ -13,10 +13,16 @@
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.0",
+    "@types/node-fetch": "^2.5.12",
+    "@types/serve-handler": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.5",
+    "serve-handler": "^6.1.3"
   }
 }
