@@ -1,13 +1,31 @@
-import * as fs from "fs";
-
-export function readFile(filename: string): string {
-    return fs.readFileSync(__dirname + "/../" + filename, "utf-8");
+function stateful(target: any, propertyKey: string): void {
+    const privatePropKey = Symbol();
+    Reflect.defineProperty(target, propertyKey, {
+        get(this: any) {
+            return this[privatePropKey];
+        },
+        set(this: any, value: string) {
+            console.log("Setting value to:", value);
+            this[privatePropKey] = value;
+            const equivalentNode = this.findEquivalentNode();
+            if (equivalentNode != null) {
+                equivalentNode[privatePropKey] = value;
+            }
+        }
+    });
 }
 
-export function writeLine(line: string) {
-    console.log(line);
-}
+export class MyClass {
+    @stateful
+    public myProperty: string;
 
-if (require.main === module) {
-    writeLine("Hello, world!");
+    public otherClass?: MyClass;
+
+    constructor() {
+        this.myProperty = "hello";
+    }
+
+    public findEquivalentNode() {
+        return this.otherClass;
+    }
 }

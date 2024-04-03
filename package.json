@@ -12,11 +12,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^27.5.0",
-    "@types/node": "^16.11.0",
+    "@types/node": "^18.19.29",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.0",
-    "typescript": "^4.6.0"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
   }
 }
