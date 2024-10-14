@@ -29,6 +29,6 @@ jobs:
     - run: npm ci
     - run: npm install -D keytar @zowe/secrets-for-zowe-sdk
     - run: node -p "require('keytar')"
-    - run: node -p "require('@zowe/secrets-for-zowe-sdk')"
+    - run: node -p "require('@zowe/secrets-for-zowe-sdk').keyring"
     - run: npm run build --if-present
     - run: npm test
